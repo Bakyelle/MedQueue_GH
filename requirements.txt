@@ -1,0 +1,39 @@
+# MedQueue GH — Python dependencies
+# Pin major versions; run `pip install -r requirements.txt`
+
+# Core
+Django
+djangorestframework
+# Auth
+djangorestframework-simplejwt
+
+# Database
+psycopg2-binary         # PostgreSQL adapter
+
+# CORS
+django-cors-headers
+
+# Filtering
+django-filter
+
+# Async task queue (notifications, reminders)
+celery
+redis
+django-celery-beat      # periodic tasks (appointment reminders)
+
+# Firebase Admin SDK (Realtime DB, FCM push, Storage)
+firebase-admin
+
+# Environment variables
+python-decouple
+
+# Utilities
+Pillow                  # image handling for profile pictures
+
+# Dev / test
+pytest-django
+factory-boy
+coverage
+
+# Production WSGI server
+gunicorn
