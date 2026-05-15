@@ -1,154 +1,98 @@
-# MedQueue GH
+# MedQueue GH — Backend (Django API)
 
-A cross-platform mobile application designed to modernize healthcare access at local hospitals in Ghana, starting with a pilot deployment at the **University of Energy and Natural Resources (UENR) Health Services**.
+This branch contains the **backend** for **MedQueue GH**, a cross-platform mobile application designed to modernize healthcare access at local hospitals in Ghana, starting with a pilot deployment at the **University of Energy and Natural Resources (UENR) Health Services**.
 
-> Mobile-based medical appointment scheduling with virtual queuing, an AI health assistant, and emergency response support.
+## Repository Branches
 
----
+- **Backend (this branch):** `main` — Django + Django REST Framework API
+- **Frontend:** `master` — Flutter mobile application
 
-## Table of Contents
-
-- [About](#about)
-- [Key Features](#key-features)
-- [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Backend Setup (Django)](#backend-setup-django)
-  - [Mobile App Setup (Flutter)](#mobile-app-setup-flutter)
-- [Configuration](#configuration)
-- [API](#api)
-- [Contributing](#contributing)
-- [License](#license)
+> If you’re looking for the mobile app UI, switch to the `master` branch.
 
 ---
 
-## About
+## What’s in this branch
 
-Many hospitals still rely on manual and phone-based appointment scheduling, which contributes to long wait times, missed appointments, and limited visibility into patient flow.
-
-**MedQueue GH** helps by:
-
-- enabling patients to book, reschedule, or cancel appointments digitally
-- providing a live **virtual queue** with real-time position updates
-- sending automated reminders (push/SMS/WhatsApp, depending on configuration)
-- offering first-aid guidance via an AI assistant (non-diagnostic)
-- supporting emergency SOS with location capture and notification
-
----
-
-## Key Features
-
-- **Authentication**: Role-based access (Patient, Doctor, Admin)
-- **Appointments**: Browse doctors, view availability, book/reschedule/cancel
-- **Virtual Queue**: Live queue position, estimated wait time, readiness alerts
-- **AI Assistant**: First-aid guidance and basic symptom information *(non-diagnostic)*
-- **Emergency SOS**: One-tap SOS with GPS capture and hospital alert
-- **Notifications**: Push notifications (FCM) plus optional SMS/WhatsApp reminders
-- **Admin Tools**: User management, schedules, queue monitoring, emergency logs
+- Django project and apps (API, models, admin)
+- REST endpoints (Django REST Framework)
+- Backend configuration and dependencies (`requirements.txt`)
 
 ---
 
 ## Tech Stack
 
-### Mobile (Frontend)
-
-- **Flutter (Dart)**
-- Material Design
-- Maps/GPS support (e.g., Google Maps)
-
-### Backend
-
+- **Python**
 - **Django**
 - **Django REST Framework**
-- *(Optional)* **Django Channels** for real-time updates
-
-### Data
-
-- SQLite for development
-- PostgreSQL recommended for production
-
-### Integrations (optional / configurable)
-
-- Firebase Authentication + FCM
-- Firebase Storage / Realtime Database
-- Google Maps API
-- WhatsApp Business API
-- SMS provider (e.g., Arkesel)
-- LLM provider (OpenAI / Hugging Face)
+- Database: SQLite (dev) / PostgreSQL (recommended for production)
 
 ---
 
-## Project Structure
+## Project Structure (Backend)
 
-> This section may need adjustment to match the current repo layout.
+At the repository root (this branch), you should see:
 
-Common layout:
-
-- `medqueue_backend/` — Django backend (API, models, admin)
-- `mobile/` or `medqueue_mobile/` — Flutter app
+- `manage.py` — Django entry point
+- `medqueue_backend/` — Django settings / urls / wsgi-asgi
+- `base/` — Django app(s) and backend modules (project-specific)
 - `requirements.txt` — Python dependencies
 
 ---
 
-## Getting Started
+## Getting Started (Backend)
 
 ### Prerequisites
 
-- Flutter SDK (3.x)
-- Dart SDK
 - Python 3.10+
 - pip
 - Git
-- Android Studio and/or Xcode (for emulators)
 
-### Backend Setup (Django)
+### Setup
 
 ```bash
-# from the repo root
-cd medqueue_backend
+# clone
+git clone https://github.com/Bakyelle/MedQueue_GH.git
+cd MedQueue_GH
 
-# create and activate a virtual environment
+# (important) switch to backend branch
+git checkout main
+
+# create + activate venv
 python -m venv venv
 # macOS/Linux
 source venv/bin/activate
 # Windows (PowerShell)
 # .\venv\Scripts\Activate.ps1
 
+# install deps
 pip install -r requirements.txt
 
+# run migrations
 python manage.py migrate
+
+# start server
 python manage.py runserver
 ```
 
-### Mobile App Setup (Flutter)
+---
 
-```bash
-# from the repo root
-# cd <flutter-project-directory>
-flutter pub get
-flutter run
-```
+## Environment / Configuration
+
+This backend will typically require secrets and environment variables (e.g., Django `SECRET_KEY`, database URL, third-party API keys).
+
+**Do not commit secrets**. Use a `.env` file locally (or another secrets manager) and load it in `settings.py`.
+
+If you share which variables you’re using (or where they’re defined), I can add an exact **Environment Variables** section.
 
 ---
 
-## Configuration
+## API Documentation
 
-Environment variables and secrets (API keys, Firebase config, SMS/WhatsApp credentials) **should not be committed**.
+If you have an OpenAPI/Swagger schema, Postman collection, or DRF browsable API URLs, link them here.
 
-Create a local `.env` (or use your preferred secret management approach) and configure the backend/mobile app accordingly.
+Suggested sections to document:
 
-If you want, tell me what env vars your project actually uses (or point me to the settings file), and I can document them precisely.
-
----
-
-## API
-
-If the backend exposes REST endpoints via Django REST Framework, document them here (or link to an API spec).
-
-Suggested minimum:
-
-- Authentication
+- Auth (patients/doctors/admin)
 - Doctors & schedules
 - Appointments
 - Queue updates
@@ -158,14 +102,12 @@ Suggested minimum:
 
 ## Contributing
 
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/my-change`
-3. Commit changes: `git commit -m "Describe your change"`
-4. Push to your fork: `git push origin feature/my-change`
-5. Open a Pull Request
+1. Create a feature branch off the correct branch (backend changes from `main`)
+2. Commit your changes
+3. Open a PR
 
 ---
 
 ## License
 
-Add your license here (e.g., MIT, Apache-2.0) or link to the `LICENSE` file.
+Add a license (and/or a `LICENSE` file) for the project.
