@@ -113,3 +113,22 @@ Make sure you have the following installed:
 
 #### 1. Clone the repository
 
+#### 2. Cd medqueue_backend
+
+# install, create and activate a virtual environment
+
+#### 3. pip install virtualenv
+
+virtualenv venv
+
+source venv/bin/activate
+
+# install the requirement
+
+pip install -r requirements.txt
+
+# run project
+
+python manage.py runserver
+
+
