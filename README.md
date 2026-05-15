@@ -1,134 +1,171 @@
-# 🏥 MedQueue GH
+# MedQueue GH
 
-&gt; A mobile-based medical appointment scheduling system with virtual queuing, AI chatbot, and emergency response — built for hospitals in Ghana.
+A cross-platform mobile application designed to modernize healthcare access at local hospitals in Ghana, starting with a pilot deployment at the **University of Energy and Natural Resources (UENR) Health Services**.
+
+> Mobile-based medical appointment scheduling with virtual queuing, an AI health assistant, and emergency response support.
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
-- [About the Project](#about-the-project)
-- [Features](#features)
+- [About](#about)
+- [Key Features](#key-features)
 - [Tech Stack](#tech-stack)
-- [Screenshots](#screenshots)
+- [Project Structure](#project-structure)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [Environment Variables](#environment-variables)
-- [API Endpoints](#api-endpoints)
-- [Database Schema](#database-schema)
-- [Team](#team)
-- [Supervisor](#supervisor)
+  - [Backend Setup (Django)](#backend-setup-django)
+  - [Mobile App Setup (Flutter)](#mobile-app-setup-flutter)
+- [Configuration](#configuration)
+- [API](#api)
+- [Contributing](#contributing)
 - [License](#license)
 
 ---
 
-## 🩺 About the Project
+## About
 
-**MedQueue GH** is a cross-platform mobile application designed to modernize healthcare access at local hospitals in Ghana, starting with a pilot deployment at the **University of Energy and Natural Resources (UENR) Health Services**.
+Many hospitals still rely on manual and phone-based appointment scheduling, which contributes to long wait times, missed appointments, and limited visibility into patient flow.
 
-The system replaces manual, phone-based appointment scheduling with a digital, real-time solution that lets patients book appointments, wait virtually in a live queue, get first-aid guidance from an AI chatbot, and request emergency assistance with one tap.
+**MedQueue GH** helps by:
 
-### Problem We Solve
-- ❌ Long wait times at hospital reception desks
-- ❌ Missed appointments due to lack of reminders
-- ❌ No real-time visibility into queue position
-- ❌ Delayed emergency response due to poor location sharing
-- ❌ Inefficient doctor-patient communication
-
-### Our Solution
-- ✅ Book, reschedule, or cancel appointments from your phone
-- ✅ Join a virtual queue and track your position in real time
-- ✅ Receive automated reminders via push notification, SMS, and WhatsApp
-- ✅ Get instant first-aid guidance from an AI health assistant
-- ✅ Trigger emergency SOS with automatic GPS location sharing
-- ✅ Chat directly with your doctor via WhatsApp
+- enabling patients to book, reschedule, or cancel appointments digitally
+- providing a live **virtual queue** with real-time position updates
+- sending automated reminders (push/SMS/WhatsApp, depending on configuration)
+- offering first-aid guidance via an AI assistant (non-diagnostic)
+- supporting emergency SOS with location capture and notification
 
 ---
 
-## ✨ Features
+## Key Features
 
-| Module | Description |
-|--------|-------------|
-| 🔐 **Authentication** | Phone OTP & email/password login with role-based access control (Patient, Doctor, Admin) |
-| 📅 **Appointments** | Browse doctors by specialization, view available slots, book/reschedule/cancel appointments |
-| 🚶 **Virtual Queue** | Real-time queue with live position updates, estimated wait time, and "get ready" alerts |
-| 🤖 **AI Chatbot** | First-aid guidance and basic symptom information (non-diagnostic, with medical disclaimer) |
-| 🚨 **Emergency SOS** | One-tap emergency button with 5-second countdown, GPS capture, and instant hospital notification |
-| 💬 **WhatsApp Integration** | In-app WhatsApp chat initiation between patients and doctors |
-| 🔔 **Notifications** | Push (FCM), SMS, and WhatsApp reminders (24h & 30min before appointment) |
-| 📊 **Admin Dashboard** | User management, doctor schedule setup, live queue monitoring, emergency logs, and reports |
+- **Authentication**: Role-based access (Patient, Doctor, Admin)
+- **Appointments**: Browse doctors, view availability, book/reschedule/cancel
+- **Virtual Queue**: Live queue position, estimated wait time, readiness alerts
+- **AI Assistant**: First-aid guidance and basic symptom information *(non-diagnostic)*
+- **Emergency SOS**: One-tap SOS with GPS capture and hospital alert
+- **Notifications**: Push notifications (FCM) plus optional SMS/WhatsApp reminders
+- **Admin Tools**: User management, schedules, queue monitoring, emergency logs
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
-### Frontend
-- **Flutter** — Cross-platform mobile UI framework (Dart)
-- **Material Design 3** — Modern, consistent UI/UX
-- **google_maps_flutter** — GPS and map rendering
+### Mobile (Frontend)
+
+- **Flutter (Dart)**
+- Material Design
+- Maps/GPS support (e.g., Google Maps)
 
 ### Backend
-- **Django** — Python web framework (REST API + ORM + Admin)
-- **Django REST Framework** — API serialization and authentication
-- **Django Channels** *(optional)* — Real-time WebSocket support for queue updates
 
-### Database
-- **Django ORM + SQLite** *(development)*
-- **PostgreSQL** *(recommended for production)*
+- **Django**
+- **Django REST Framework**
+- *(Optional)* **Django Channels** for real-time updates
 
-### External Services
-| Service | Purpose |
-|---------|---------|
-| Firebase Authentication | Phone OTP & email/password auth |
-| Firebase Cloud Messaging (FCM) | Push notifications |
-| Firebase Storage | Profile picture uploads |
-| Firebase Realtime Database | Live queue position sync |
-| Google Maps API | GPS location & map rendering |
-| Meta WhatsApp Business API | Doctor-patient messaging |
-| OpenAI / Hugging Face API | AI chatbot responses |
-| Arkesel SMS API | SMS reminders & OTP fallback (Ghana) |
+### Data
 
----
+- SQLite for development
+- PostgreSQL recommended for production
 
-## 📱 Screenshots
+### Integrations (optional / configurable)
 
-*Coming soon — screenshots will be added after the first UI sprint.*
+- Firebase Authentication + FCM
+- Firebase Storage / Realtime Database
+- Google Maps API
+- WhatsApp Business API
+- SMS provider (e.g., Arkesel)
+- LLM provider (OpenAI / Hugging Face)
 
 ---
 
-## 🚀 Getting Started
+## Project Structure
+
+> This section may need adjustment to match the current repo layout.
+
+Common layout:
+
+- `medqueue_backend/` — Django backend (API, models, admin)
+- `mobile/` or `medqueue_mobile/` — Flutter app
+- `requirements.txt` — Python dependencies
+
+---
+
+## Getting Started
 
 ### Prerequisites
 
-Make sure you have the following installed:
+- Flutter SDK (3.x)
+- Dart SDK
+- Python 3.10+
+- pip
+- Git
+- Android Studio and/or Xcode (for emulators)
 
-- [Flutter SDK](https://docs.flutter.dev/get-started/install) (v3.16+)
-- [Dart](https://dart.dev/get-dart)
-- [Python](https://www.python.org/downloads/) (v3.10+)
-- [pip](https://pip.pypa.io/en/stable/installation/)
-- [Git](https://git-scm.com/downloads)
-- Android Studio / Xcode (for emulator or physical device)
+### Backend Setup (Django)
 
-### Installation
+```bash
+# from the repo root
+cd medqueue_backend
 
-#### 1. Clone the repository
-
-#### 2. Cd medqueue_backend
-
-# install, create and activate a virtual environment
-
-#### 3. pip install virtualenv
-
-virtualenv venv
-
+# create and activate a virtual environment
+python -m venv venv
+# macOS/Linux
 source venv/bin/activate
-
-# install the requirement
+# Windows (PowerShell)
+# .\venv\Scripts\Activate.ps1
 
 pip install -r requirements.txt
 
-# run project
-
+python manage.py migrate
 python manage.py runserver
+```
 
+### Mobile App Setup (Flutter)
 
+```bash
+# from the repo root
+# cd <flutter-project-directory>
+flutter pub get
+flutter run
+```
+
+---
+
+## Configuration
+
+Environment variables and secrets (API keys, Firebase config, SMS/WhatsApp credentials) **should not be committed**.
+
+Create a local `.env` (or use your preferred secret management approach) and configure the backend/mobile app accordingly.
+
+If you want, tell me what env vars your project actually uses (or point me to the settings file), and I can document them precisely.
+
+---
+
+## API
+
+If the backend exposes REST endpoints via Django REST Framework, document them here (or link to an API spec).
+
+Suggested minimum:
+
+- Authentication
+- Doctors & schedules
+- Appointments
+- Queue updates
+- Emergency SOS events
+
+---
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/my-change`
+3. Commit changes: `git commit -m "Describe your change"`
+4. Push to your fork: `git push origin feature/my-change`
+5. Open a Pull Request
+
+---
+
+## License
+
+Add your license here (e.g., MIT, Apache-2.0) or link to the `LICENSE` file.
