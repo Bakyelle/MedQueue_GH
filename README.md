@@ -1,6 +1,8 @@
 # MedQueue GH — Frontend (Flutter App)
 
-This branch contains the **frontend mobile app** for **MedQueue GH**, a cross-platform system designed to modernize healthcare access at local hospitals in Ghana, with the first deployment at the **University of Energy and Natural Resources (UENR) Health Services**.
+![MedQueue GH Architecture](docs/medqueue_gh_architecture.svg)
+
+This branch contains the **frontend mobile app** for **MedQueue GH**, a cross-platform system designed to modernize healthcare access at local hospitals in Ghana, with the first deployment at the *...*
 ## Team
 
 - BAKYELLE DAVID (Lead)
