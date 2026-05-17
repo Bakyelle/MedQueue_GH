@@ -1,6 +1,8 @@
 # MedQueue GH — Backend (Django API)
 
-This branch contains the **backend** for **MedQueue GH**, a cross-platform mobile application designed to modernize healthcare access at local hospitals in Ghana, starting with a pilot deployment at t[...]
+![MedQueue GH Architecture](docs/medqueue_gh_architecture.svg)
+
+This branch contains the **backend** for **MedQueue GH**, a cross-platform mobile application designed to modernize healthcare access at local hospitals in Ghana, starting with a pilot deployment at ...
 
 ## Team
 
