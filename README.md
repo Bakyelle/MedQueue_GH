@@ -1,6 +1,14 @@
 # MedQueue GH — Backend (Django API)
 
-This branch contains the **backend** for **MedQueue GH**, a cross-platform mobile application designed to modernize healthcare access at local hospitals in Ghana, starting with a pilot deployment at the **University of Energy and Natural Resources (UENR) Health Services**.
+This branch contains the **backend** for **MedQueue GH**, a cross-platform mobile application designed to modernize healthcare access at local hospitals in Ghana, starting with a pilot deployment at t[...]
+
+## Team
+
+- BAKYELLE DAVID (Lead)
+- AMOANIMAA Bernice (Ms)
+- OSIKA Kofi Ricky
+- OFOSUHENE Jeffery Nana
+- ASABAH Prince
 
 ## Repository Branches
 
