@@ -84,6 +84,31 @@ python manage.py migrate
 python manage.py runserver
 ```
 
+### Quick Demo
+
+Use these steps to demonstrate the running app locally:
+
+1. Start the backend:
+
+```powershell
+. .\.venv\Scripts\Activate.ps1
+python manage.py runserver 127.0.0.1:8000
+```
+
+2. Open the Django admin at http://127.0.0.1:8000/admin/ and sign in with:
+- Username: `admin`
+- Password: `AdminPass123`
+
+3. Test the patient flow with the seeded demo account:
+- Login URL: http://127.0.0.1:8000/login/
+- Username: `demo_patient`
+- Password: `DemoPass123!`
+
+4. Register a new patient by sending a POST request to http://127.0.0.1:8000/register/.
+  The OTP is printed in the server terminal during development.
+
+5. Verify the OTP with a POST request to http://127.0.0.1:8000/otp/verify/ to receive JWT tokens.
+
 ---
 
 ## Environment / Configuration

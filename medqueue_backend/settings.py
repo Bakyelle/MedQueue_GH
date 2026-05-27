@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "change-me-in-production")
 
-DEBUG = os.environ.get("DEBUG", "False") == "True"
+DEBUG = os.environ.get("DEBUG", "True") == "True"
 
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "localhost 127.0.0.1").split()
 
@@ -39,13 +39,7 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    "base.accounts",
-    # future modules:
-    # "apps.appointments",
-    # "apps.queue",
-    # "apps.chatbot",
-    # "apps.emergency",
-    # "apps.notifications",
+    "base",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -53,25 +47,34 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 # -----------------------------------------------------------------------
 # Custom User Model  — MUST be set before first migration
 # -----------------------------------------------------------------------
-AUTH_USER_MODEL = "accounts.User"
+AUTH_USER_MODEL = "base.User"
 
 # -----------------------------------------------------------------------
 # Database
 # -----------------------------------------------------------------------
 
-DATABASES = {
-    "default": {
-        "ENGINE":   "django.db.backends.postgresql",
-        "NAME":     os.environ.get("DB_NAME",     "medqueue_db"),
-        "USER":     os.environ.get("DB_USER",     "medqueue_user"),
-        "PASSWORD": os.environ.get("DB_PASSWORD", ""),
-        "HOST":     os.environ.get("DB_HOST",     "localhost"),
-        "PORT":     os.environ.get("DB_PORT",     "5432"),
-        "OPTIONS":  {
-            "connect_timeout": 10,
-        },
+if os.environ.get("DB_ENGINE", "sqlite").lower() in ("postgres", "postgresql"):
+    DATABASES = {
+        "default": {
+            "ENGINE":   "django.db.backends.postgresql",
+            "NAME":     os.environ.get("DB_NAME",     "medqueue_db"),
+            "USER":     os.environ.get("DB_USER",     "medqueue_user"),
+            "PASSWORD": os.environ.get("DB_PASSWORD", ""),
+            "HOST":     os.environ.get("DB_HOST",     "localhost"),
+            "PORT":     os.environ.get("DB_PORT",     "5432"),
+            "OPTIONS":  {
+                "connect_timeout": 10,
+            },
+        }
     }
-}
+else:
+    # Default to a local SQLite DB for easy development
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": str(BASE_DIR / "db.sqlite3"),
+        }
+    }
 
 # -----------------------------------------------------------------------
 # REST Framework
@@ -107,7 +110,7 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_PAGINATION_CLASS":  "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 20,
-    "EXCEPTION_HANDLER": "base.accounts.exceptions.custom_exception_handler",
+    "EXCEPTION_HANDLER": "base.exceptions.custom_exception_handler",
 }
 
 # -----------------------------------------------------------------------
@@ -152,10 +155,13 @@ AUTH_PASSWORD_VALIDATORS = [
 # CORS  (Flutter app will be on a different origin)
 # -----------------------------------------------------------------------
 
-CORS_ALLOWED_ORIGINS = os.environ.get(
-    "CORS_ALLOWED_ORIGINS",
-    "http://localhost:3000 http://127.0.0.1:3000",
-).split()
+if DEBUG:
+    CORS_ALLOW_ALL_ORIGINS = True      # Flutter web dev server uses random ports
+else:
+    CORS_ALLOWED_ORIGINS = os.environ.get(
+        "CORS_ALLOWED_ORIGINS",
+        "http://localhost:3000 http://127.0.0.1:3000",
+    ).split()
 CORS_ALLOW_CREDENTIALS = True
 
 # -----------------------------------------------------------------------
@@ -171,6 +177,23 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+]
+
+# Minimal templates config required by Django admin
+TEMPLATES = [
+    {
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
+            ],
+        },
+    },
 ]
 
 # -----------------------------------------------------------------------
@@ -217,3 +240,13 @@ LOGGING = {
         },
     },
 }
+
+# Root URL configuration and WSGI entrypoint for the project
+ROOT_URLCONF = "medqueue_backend.urls"
+WSGI_APPLICATION = "medqueue_backend.wsgi.application"
+
+# Static files (development)
+STATIC_URL = "/static/"
+
+# Default primary key field type
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

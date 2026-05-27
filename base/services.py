@@ -51,9 +51,9 @@ class OTPService:
         )
         # In development, also print to stdout for easy retrieval
         print(f"\n{'='*50}")
-        print(f"  OTP CODE  →  {code}")
-        print(f"  Phone     →  {phone}")
-        print(f"  Purpose   →  {purpose}")
+        print(f"  OTP CODE  ->  {code}")
+        print(f"  Phone     ->  {phone}")
+        print(f"  Purpose   ->  {purpose}")
         print(f"{'='*50}\n")
 
     @staticmethod
