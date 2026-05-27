@@ -2,7 +2,7 @@
 
 ![MedQueue GH Architecture](docs/medqueue_gh_architecture.svg)
 
-This branch contains the **backend** for **MedQueue GH**, a cross-platform mobile application designed to modernize healthcare access at local hospitals in Ghana, starting with a pilot deployment at ...
+This branch contains the **backend** for **MedQueue GH**, a cross-platform mobile application designed to modernize healthcare access at local hospitals in Ghana, starting with a pilot deployment at the University of Energy and Natural Resources (UENR) Health Services.
 
 ## Team
 
@@ -132,6 +132,18 @@ Suggested sections to document:
 - Appointments
 - Queue updates
 - Emergency SOS events
+
+---
+
+## Documentation & QA
+
+- **[Backend API Documentation](API_DOCUMENTATION.md)** — Comprehensive reference for backend endpoints, authentication (JWT), and response structures.
+- **[Appointments Test Suite Report](APPOINTMENTS_TEST_COMPLETION_REPORT.md)** — Test coverage and outcomes for the appointments module.
+- **[Queue Module Test Reports](QUEUE_TESTS_COMPLETION_REPORT.md)** — 100% queue module test outcomes, endpoint map, and developer guidance.
+- **[Queue Module Quick Reference](QUEUE_TESTS_QUICK_REFERENCE.md)** — Endpoints, status codes, and common test patterns for virtual queue features.
+- **[Slot Management Flow](SLOT_GENERATION_FLOW.md)** — Complete documentation on how appointment slots are generated and managed.
+- **[Test Suite Architecture](TEST_ARCHITECTURE_OVERVIEW.md)** — Structure and best practices for backend testing.
+- **[Latest Test Session Summary](SESSION_SUMMARY_20250520.md)** — Summary of last completed test milestones.
 
 ---
 
